@@ -1,11 +1,13 @@
 plugins {
-    id 'base'
+    id("base")
 }
 
-task createZip(type: Zip) {
-    from 'src'
-    archiveFileName = 'trainSchedule.zip'
-    destinationDirectory = file("$buildDir/dist")
+tasks.register<Zip>("createZip") {
+    from("src")
+    archiveFileName.set("trainSchedule.zip")
+    destinationDirectory.set(file("$buildDir/dist"))
 }
 
-build.dependsOn createZip
+tasks.named("build") {
+    dependsOn("createZip")
+}
